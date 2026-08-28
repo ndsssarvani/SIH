@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const PAGE_CSS = `
   :root{
@@ -376,6 +377,8 @@ const PAGE_CSS = `
 `;
 
 export default function Home() {
+  const navigate = useNavigate();
+
   useEffect(() => {
     document.title = "SAHAYA AI — Real-Time Stress & Trauma Assessment | NHAA 14566";
 
@@ -444,6 +447,13 @@ export default function Home() {
     };
   }, []);
 
+  // Central place that decides where "Client" / "Officers" buttons go.
+  // Login.jsx reads location.state.role to pre-select the right tab.
+  const goToLogin = (role) => (e) => {
+    e.preventDefault();
+    navigate("/login", { state: { role } });
+  };
+
   return (
     <>
       <style>{PAGE_CSS}</style>
@@ -477,8 +487,8 @@ export default function Home() {
             <a href="#stakeholders">Stakeholders</a>
           </div>
           <div className="nav-actions">
-            <a className="btn btn-ghost" href="#client">Client</a>
-            <a className="btn btn-solid" href="#officers">
+            <a className="btn btn-ghost" href="#client" onClick={goToLogin("client")}>Client</a>
+            <a className="btn btn-solid" href="#officers" onClick={goToLogin("officer")}>
               Officers
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
                 <path d="M5 12h14M13 6l6 6-6 6" />
@@ -505,7 +515,7 @@ export default function Home() {
             <span className="l2">is a life protected</span>
           </h1>
           <div className="cine-cta">
-            <a className="btn-cine" href="#officers">
+            <a className="btn-cine" href="#officers" onClick={goToLogin("officer")}>
               Officers Portal
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round">
                 <path d="M5 12h14M13 6l6 6-6 6" />
@@ -848,13 +858,13 @@ export default function Home() {
             <h2>Support that recognises distress the moment it&apos;s spoken.</h2>
             <p>Officers can access the case dashboard, review SVI scores and manage routing. Clients can reach support privately and securely.</p>
             <div className="cta-ctas">
-              <a className="btn btn-solid" id="officers" href="#">
+              <a className="btn btn-solid" id="officers" href="#" onClick={goToLogin("officer")}>
                 Officers Portal
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
                   <path d="M5 12h14M13 6l6 6-6 6" />
                 </svg>
               </a>
-              <a className="btn btn-ghost" id="client" href="#">Client Access</a>
+              <a className="btn btn-ghost" id="client" href="#" onClick={goToLogin("client")}>Client Access</a>
             </div>
             <div className="helpline">
               In an emergency, call the National Helpline Against Atrocities — <b>14566</b>, toll-free, 24×7.
@@ -882,8 +892,8 @@ export default function Home() {
             <div className="foot-links">
               <a href="#">Privacy Policy</a>
               <a href="#">Terms of Use</a>
-              <a href="#client">Client</a>
-              <a href="#officers">Officers</a>
+              <a href="#client" onClick={goToLogin("client")}>Client</a>
+              <a href="#officers" onClick={goToLogin("officer")}>Officers</a>
               <a href="#">Contact</a>
             </div>
           </div>

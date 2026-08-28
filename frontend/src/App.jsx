@@ -1,47 +1,26 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
-import Dashboard from "./pages/officer/Dashboard";
-import Cases from "./pages/officer/Cases";
-import CaseDetails from "./pages/officer/CaseDetails";
-import Alerts from "./pages/officer/Alerts";
-import Reports from "./pages/officer/Reports";
 import Home from "./pages/Home";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import Consent from "./pages/Consent";
+import Complaint from "./pages/Complaint";
 
-function App() {
+
+
+export default function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home/>} />
-
-        <Route
-          path="/officer/dashboard"
-          element={<Dashboard />}
-        />
-
-        <Route
-          path="/officer/cases"
-          element={<Cases />}
-        />
-
-        <Route
-          path="/officer/cases/:id"
-          element={<CaseDetails />}
-        />
-
-        <Route
-          path="/officer/alerts"
-          element={<Alerts />}
-        />
-
-        <Route
-          path="/officer/reports"
-          element={<Reports />}
-        />
-
+        <Route path="/login" element={<Login/>} />
+        <Route path="/register" element={<Register/>} />
+        <Route path="/consent" element={<Consent/>} />
+        <Route path="/complaint" element={<Complaint/>} />
+        {/* Add these once you build the pages, so the Login redirects work too */}
+        {/* <Route path="/dashboard" element={<OfficerDashboard />} /> */}
+        {/* <Route path="/support" element={<ClientSupport />} /> */}
       </Routes>
     </BrowserRouter>
   );
 }
-
-export default App;
