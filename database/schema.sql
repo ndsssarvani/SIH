@@ -1,0 +1,2 @@
+-- Initial schema placeholder for the prototype.
+-- Tables can be created through SQLAlchemy models in backend/database/models.py.
